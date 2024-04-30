@@ -1,10 +1,11 @@
 import React, { useCallback, useEffect } from "react";
 import { Switch, Route } from "react-router-dom";
-import MainContent from "../components/MainContent.jsx";
+import MainContent from "../components/reactPart/MainContent.jsx";
 import AngularMicrofrontend from "../components/AngularMicrofrontend.js";
 import SvelteMicrofrontend from "../components/SvelteMicrofrontend.js";
 import VueMicrofrontend from "../components/VueMicrofrontend.js";
-import AllExample from "../components/AllExample.js";
+import AllExample from "../components/miniMf/AllExample.js";
+import NpmPackagePage from "../components/NpmContent.js";
 import { useGlobalContext } from "../components/GlobalContext.js";
 
 export default function Routes() {
@@ -60,6 +61,15 @@ export default function Routes() {
           render={useCallback(
             (props) => (
               <AllExample></AllExample>
+            ),
+            []
+          )}
+        />
+        <Route
+          path="/npm"
+          render={useCallback(
+            (props) => (
+              <NpmPackagePage></NpmPackagePage>
             ),
             []
           )}

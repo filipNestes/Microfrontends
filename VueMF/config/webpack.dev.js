@@ -21,6 +21,7 @@ const devConfig = {
       filename: "remoteEntry.js",
       exposes: {
         "./vueMicrofrontend": "./src/bootstrap",
+        "./vueMiniApp": "./src/miniApp/miniBootstrap",
       },
       shared: packageJson.dependencies,
     }),

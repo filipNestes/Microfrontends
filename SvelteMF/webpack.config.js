@@ -58,6 +58,7 @@ module.exports = {
       filename: "remoteEntry.js",
       exposes: {
         "./footerModule": "./src/loadApp.js",
+        "./svelteMiniApp": "./src/loadMiniApp.js",
       },
     }),
     new MiniCssExtractPlugin({

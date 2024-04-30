@@ -1,0 +1,13 @@
+.all-examples-title {
+  background: #2ecfc4;
+  padding: 15px;
+  text-align: center;
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.all-examples-containers {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}

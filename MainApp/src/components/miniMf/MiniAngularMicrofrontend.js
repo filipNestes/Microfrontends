@@ -7,7 +7,16 @@ const angularMiniMicrofrontend = () => {
     mount();
   }, []);
   return (
-    <div className="mini-app-module">
+    <div
+      className="mini-apps"
+      style={{
+        width: "48%",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        margin: "5rem 0",
+      }}
+    >
       <app-root></app-root>
     </div>
   );

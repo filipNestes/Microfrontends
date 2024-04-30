@@ -1,0 +1,11 @@
+.mini-apps {
+  display: flex;
+  .angular-mini-app-module {
+    .angular-microfrontend {
+      background: red;
+    }
+  }
+  .vueMf {
+    width: 50%;
+  }
+}

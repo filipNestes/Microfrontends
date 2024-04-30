@@ -22,6 +22,7 @@ module.exports = {
       exposes: {
         "./LayoutTemplate": "./src/layout/LayoutTemplate.js",
         "./MiniReactApp": "./src/miniApp/miniReactApp.js",
+        "./MiniAppInput": "./src/miniApp/miniAppInput.js",
       },
       remotes: {
         footerVue: "footerVue@http://localhost:3010/remoteEntry.js",

@@ -12,7 +12,7 @@ const angularMicrofrontend = () => {
     }
   }, []);
   return (
-    <div className="left-sidebar-module">
+    <div className="angular-microfrontend-module">
       <app-root></app-root>
     </div>
   );

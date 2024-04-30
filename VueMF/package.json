@@ -5,6 +5,7 @@
     "start": "webpack serve --config=config/webpack.dev.js"
   },
   "dependencies": {
+    "axios": "^1.6.8",
     "vue": "^3.0.0"
   },
   "devDependencies": {

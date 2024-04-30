@@ -1,39 +1,21 @@
 <script>
-  import { onMount } from "svelte";
+  import { onMount, onDestroy } from "svelte";
   import { writable } from "svelte/store";
-  import { fetchData, deleteData, deleteAllData } from "./dataService.js";
 
-  let books = writable([]);
-  let movies = writable([]);
+  let messageFromReact = writable(""); // Reaktívna premenná na uchovanie správy z Reactu
 
-  onMount(async () => {
-    books.set(await fetchData("books"));
-    const storedMovies = JSON.parse(localStorage.getItem("movies") || "[]");
-    movies.set(storedMovies);
+  function handleReactMessage(event) {
+    const detail = event.detail; // Dostaneme detaily z custom eventu
+    messageFromReact.set(detail.message); // Aktualizácia reaktívnej premennej
+    console.log("Received message from React:", detail.message);
+  }
+
+  onMount(() => {
+    window.addEventListener("fromReact", handleReactMessage);
   });
-
-  async function deleteBook(index) {
-    await deleteData("books", index);
-    books.update(($books) => $books.filter((_, idx) => idx !== index));
-  }
-
-  async function deleteAllBooks() {
-    await deleteAllData("books");
-    books.set([]);
-  }
-
-  function deleteMovie(index) {
-    movies.update(($movies) => {
-      $movies.splice(index, 1);
-      return $movies;
-    });
-    localStorage.setItem("movies", JSON.stringify($movies));
-  }
-
-  function deleteAllMovies() {
-    localStorage.removeItem("movies");
-    movies.set([]);
-  }
+  onDestroy(() => {
+    window.removeEventListener("fromReact", handleReactMessage);
+  });
 </script>
 
 <div class="svelteMf">
@@ -53,72 +35,8 @@
     >
     <span><strong>SVELTE</strong>.DEV</span>
   </div>
-  <div class="svelte-table">
-    <header>
-      <h2>Books</h2>
-      <button on:click={deleteAllBooks} class="delete-all-btn"
-        >🗑️ Delete All Books</button
-      >
-    </header>
-    {#if $books.length}
-      <table>
-        <thead>
-          <tr>
-            <th>Title</th>
-            <th>Author</th>
-            <th>Genre</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {#each $books as book, i}
-            <tr>
-              <td>{book.title}</td>
-              <td>{book.author}</td>
-              <td>{book.genre}</td>
-              <td>
-                <button on:click={() => deleteBook(i)}>Delete</button>
-              </td>
-            </tr>
-          {/each}
-        </tbody>
-      </table>
-    {:else}
-      <p>No data available.</p>
-    {/if}
-
-    <header>
-      <h2>Movies</h2>
-      <button on:click={deleteAllMovies} class="delete-all-btn"
-        >🗑️ Delete All Movies</button
-      >
-    </header>
-    {#if $movies.length}
-      <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Director</th>
-            <th>Genre</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {#each $movies as movie, i}
-            <tr>
-              <td>{movie.name}</td>
-              <td>{movie.director}</td>
-              <td>{movie.genre}</td>
-              <td>
-                <button on:click={() => deleteMovie(i)}>Delete</button>
-              </td>
-            </tr>
-          {/each}
-        </tbody>
-      </table>
-    {:else}
-      <p>No movies available.</p>
-    {/if}
+  <div class="message">
+    Message from React: <span>{$messageFromReact}</span>
   </div>
 </div>
 
@@ -127,14 +45,18 @@
     display: block;
     font-family: Arial, sans-serif;
     margin-bottom: 1rem;
+    width: 30rem;
+    height: 15rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    background-color: #ffaf44;
   }
 
   .svelteMf .title {
-    background-color: #ffaf44;
     font-size: 18px;
     font-weight: bold;
     text-align: center;
-    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -169,100 +91,14 @@
     font-weight: 600;
   }
 
-  .svelteMf .svelte-table {
-    margin: 20px;
-  }
-
-  .svelteMf header {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 1rem;
-    margin-top: 3rem;
-  }
-
-  .svelteMf header h2 {
-    color: #333;
-    font-size: 24px;
-    margin: unset;
-    width: 100%;
-    text-align: center;
-  }
-
-  .svelteMf header .delete-all-btn {
-    padding: 6px 12px;
-    color: #fff;
-    background-color: #dc3545;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-weight: bold;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-    margin-left: auto;
-    width: 11rem;
-  }
-
-  .svelteMf header .delete-all-btn:hover {
-    background-color: #c82333;
-  }
-
-  .svelteMf table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-    font-size: 18px;
-  }
-
-  .svelteMf table thead tr {
-    background-color: #2c3e50;
-  }
-
-  .svelteMf table thead th {
-    font-weight: bold;
-    color: #fff;
-    padding: 10px;
-    border: 1px solid #ddd;
-    width: 30%;
-  }
-
-  .svelteMf table tbody tr:nth-child(odd) {
-    background-color: #f9f9f9;
-  }
-
-  .svelteMf table tbody tr:nth-child(even) {
-    background-color: #919191;
-  }
-
-  .svelteMf table tbody td {
-    padding: 8px;
-    border: 1px solid #ddd;
+  .svelteMf .message {
     text-align: left;
+    padding: 10px 10px;
+    font-size: 18px;
     font-weight: bold;
+    font-family: initial;
   }
-
-  .svelteMf table tbody td:last-child {
-    text-align: center;
-  }
-
-  .svelteMf button {
-    padding: 6px 12px;
-    color: #fff;
-    background-color: #007bff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-
-  .svelteMf button:hover {
-    background-color: #0056b3;
-  }
-
-  .svelteMf p {
-    font-size: 16px;
-    color: #666;
+  .svelteMf .message span {
+    color: #2c3e50;
   }
 </style>

@@ -3,17 +3,21 @@ const cors = require("cors");
 const app = express();
 const port = 3100;
 
-app.use(cors()); // Povoliť všetky CORS požiadavky
+app.use(
+  cors({
+    origin: true,
+    methods: ["GET", "POST", "DELETE", "PUT", "PATCH", "OPTIONS"],
+    credentials: true,
+  })
+);
 app.use(express.json());
 
-// Skladovanie dát podľa kategórií
 let dataStorage = {
-  books: [],
-  users: [],
+  books: [{ title: "Sample Book", author: "John Doe", genre: "Fiction" }],
+  users: [{ username: "user1", email: "user1@example.com" }],
   orders: [],
 };
 
-// Získanie dát podľa kategórie
 app.get("/data/:category", (req, res) => {
   const category = req.params.category;
   if (dataStorage[category]) {
@@ -23,7 +27,6 @@ app.get("/data/:category", (req, res) => {
   }
 });
 
-// Pridanie dát do konkrétnej kategórie
 app.post("/data/:category", (req, res) => {
   const category = req.params.category;
   if (!dataStorage[category]) {
@@ -31,6 +34,31 @@ app.post("/data/:category", (req, res) => {
   }
   dataStorage[category].push(req.body);
   res.status(200).send(`Data added to ${category}`);
+});
+
+app.delete("/data/:category/:index", (req, res) => {
+  const { category, index } = req.params;
+  if (dataStorage[category] && dataStorage[category].length > index) {
+    dataStorage[category].splice(index, 1);
+    res.status(200).json({ message: "Item deleted successfully" });
+  } else {
+    res.status(404).send("Item not found");
+  }
+});
+
+app.delete("/data/:category", (req, res) => {
+  const { category } = req.params;
+  if (dataStorage.hasOwnProperty(category)) {
+    dataStorage[category] = [];
+    res
+      .status(200)
+      .json({
+        message:
+          "All items in category '" + category + "' deleted successfully",
+      });
+  } else {
+    res.status(404).send("Category not found");
+  }
 });
 
 app.listen(port, () => {

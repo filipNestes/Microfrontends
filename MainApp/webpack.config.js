@@ -34,8 +34,6 @@ module.exports = {
         svelteMf: "svelteMf@http://localhost:3008/remoteEntry.js",
       },
       shared: {
-        react: { singleton: true, eager: true },
-        "react-dom": { singleton: true, eager: true },
         ...packageJson.dependencies,
         ...packageJson.sharedDependencies,
       },
