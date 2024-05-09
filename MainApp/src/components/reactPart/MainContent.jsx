@@ -51,11 +51,11 @@ const MyComponent = () => {
           viewBox="-10.5 -9.45 21 18.9"
           fill="#61dafb"
           xmlns="http://www.w3.org/2000/svg"
-          class="mt-4 mb-3 text-link dark:text-link-dark w-24 lg:w-28 self-center text-sm me-0 flex origin-center transition-all ease-in-out"
+          className="mt-4 mb-3 text-link dark:text-link-dark w-24 lg:w-28 self-center text-sm me-0 flex origin-center transition-all ease-in-out"
           wiid="N153"
         >
           <circle cx="0" cy="0" r="2" fill="#61dafb" wiid="N154"></circle>
-          <g stroke="#61dafb" stroke-width="1" fill="none" wiid="N155">
+          <g stroke="#61dafb" strokeWidth="1" fill="none" wiid="N155">
             <ellipse rx="10" ry="4.5" wiid="N156"></ellipse>
             <ellipse
               rx="10"

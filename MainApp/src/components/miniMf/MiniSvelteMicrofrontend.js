@@ -1,4 +1,4 @@
-import { mount } from "svelteMf/svelteMiniApp";
+import { mount } from "svelteMf/SvelteMiniApp";
 import React, { useRef, useEffect } from "react";
 
 export default () => {

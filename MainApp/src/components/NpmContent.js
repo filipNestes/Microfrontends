@@ -1,25 +1,33 @@
-import React, { useEffect, useRef } from "react";
-import helloWorld from "npmpackage";
+import React, { useState } from "react";
+import { TableComponent } from "npmpackage";
+import "./npmContent.scss";
 
 const NpmPackagePage = () => {
-  console.log("hello", helloWorld());
-  /*
-  const containerRef = useRef(null);
+  const [inputData, setInputData] = useState("");
+  const [tableData, setTableData] = useState([]);
 
-  useEffect(() => {
-    if (containerRef.current) {
-      const { default: MySvelteComponent } = require("my-svelte-component");
-      new MySvelteComponent({
-        target: containerRef.current,
-        props: { message },
-      });
-    }
-  }, [message]);*/
+  const handleInputChange = (e) => {
+    setInputData(e.target.value);
+  };
+
+  const handleAddData = () => {
+    setTableData((prev) => [...prev, inputData]);
+    setInputData("");
+  };
 
   return (
-    <div>
-      <div>{helloWorld()}</div>
-      {/*  <div ref={containerRef} /> */}
+    <div className="npm-content">
+      <label htmlFor="dataInput">Text to Npm package:</label>
+      <input
+        id="dataInput"
+        value={inputData}
+        onChange={handleInputChange}
+        placeholder="Enter new data"
+      />
+      <button onClick={handleAddData}>Add Data to Table</button>
+      <div>
+        <TableComponent initialData={tableData} />
+      </div>
     </div>
   );
 };

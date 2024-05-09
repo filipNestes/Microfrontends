@@ -49,7 +49,10 @@ export default function MiniReactApp() {
           <span>REACT</span>
         </div>
         <div className="message">
-          Message from React: <span>{messageFromReact}</span>
+          <h3>Message from React:</h3>
+          <div>
+            <span>{messageFromReact}</span>
+          </div>
         </div>
       </div>
     </div>

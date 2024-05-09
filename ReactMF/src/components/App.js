@@ -27,8 +27,8 @@ export default function App(props) {
       <div ref={nodeRef}>
         <Router>
           <Switch>
-            <Route exact path="/home">
-              <Redirect to="/" />
+            <Route exact path="/">
+              <Redirect to="/all" />
             </Route>
             <Layout {...props} />
           </Switch>

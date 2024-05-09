@@ -2,12 +2,11 @@
   import { onMount, onDestroy } from "svelte";
   import { writable } from "svelte/store";
 
-  let messageFromReact = writable(""); // Reaktívna premenná na uchovanie správy z Reactu
+  let messageFromReact = writable("");
 
   function handleReactMessage(event) {
-    const detail = event.detail; // Dostaneme detaily z custom eventu
-    messageFromReact.set(detail.message); // Aktualizácia reaktívnej premennej
-    console.log("Received message from React:", detail.message);
+    const detail = event.detail; 
+    messageFromReact.set(detail.message);
   }
 
   onMount(() => {
@@ -36,7 +35,10 @@
     <span><strong>SVELTE</strong>.DEV</span>
   </div>
   <div class="message">
-    Message from React: <span>{$messageFromReact}</span>
+    <h3>Message from React:</h3>
+    <div>
+      <span>{$messageFromReact}</span>
+    </div>
   </div>
 </div>
 
@@ -51,6 +53,8 @@
     flex-direction: column;
     justify-content: space-around;
     background-color: #ffaf44;
+    border: 2px solid #ff3e00;
+    border-radius: 8px;
   }
 
   .svelteMf .title {
@@ -98,7 +102,20 @@
     font-weight: bold;
     font-family: initial;
   }
-  .svelteMf .message span {
-    color: #2c3e50;
+  .svelteMf .message h3 {
+    text-align: center;
+    text-decoration: underline;
+    font-size: 1.5rem;
+  }
+  .svelteMf .message div {
+    color: #fff;
+    text-shadow: 1px 1px 1px rgb(1 1 1 / 50%);
+    height: 2rem;
+    padding: 0 1rem;
+    text-align: center;
+    font-weight: bold;
+  }
+  .svelteMf .message div span {
+    border-bottom: 3px dotted #fff;
   }
 </style>

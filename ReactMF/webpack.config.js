@@ -8,6 +8,7 @@ module.exports = {
 
   output: {
     path: path.join(__dirname, "/dist"),
+    publicPath: "auto",
     filename: "bundle.js",
   },
 
@@ -17,7 +18,7 @@ module.exports = {
     }),
 
     new ModuleFederationPlugin({
-      name: "microfrontend",
+      name: "ReactMicrofrontend",
       filename: "remoteEntry.js",
       exposes: {
         "./LayoutTemplate": "./src/layout/LayoutTemplate.js",
@@ -25,7 +26,7 @@ module.exports = {
         "./MiniAppInput": "./src/miniApp/miniAppInput.js",
       },
       remotes: {
-        footerVue: "footerVue@http://localhost:3010/remoteEntry.js",
+        footerVue: "FooterVue@http://localhost:3010/remoteEntry.js",
       },
       shared: {
         ...packageJson.dependencies,
@@ -48,18 +49,13 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        use: [
-          "style-loader", // vytvorí štýlové uzly z JS reťazcov
-          "css-loader", // prekladá CSS do CommonJS
-          "sass-loader", // kompiluje Sass do CSS, pomocou Node Sass by default
-        ],
+        use: ["style-loader", "css-loader", "sass-loader"],
       },
     ],
   },
 
-  // Pridanie devServer konfigurácie
   devServer: {
-    port: 3001, // Nastavenie portu na 3001
+    port: 3001,
     static: {
       directory: path.join(__dirname, "dist"),
     },

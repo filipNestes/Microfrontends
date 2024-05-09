@@ -1,6 +1,5 @@
 const apiUrl = "http://localhost:3100/data";
 
-// Funkcia pre odoslanie dát
 export const sendData = async (category, data) => {
   const response = await fetch(`${apiUrl}/${category}`, {
     method: "POST",
@@ -17,7 +16,6 @@ export const sendData = async (category, data) => {
   return await response.text();
 };
 
-// Funkcia na získanie dát
 export const fetchData = async (category) => {
   const response = await fetch(`${apiUrl}/${category}`);
   if (!response.ok) {

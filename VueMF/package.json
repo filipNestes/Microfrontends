@@ -2,7 +2,8 @@
   "name": "vue-microfrontend",
   "version": "1.0.0",
   "scripts": {
-    "start": "webpack serve --config=config/webpack.dev.js"
+    "start": "webpack serve --config=config/webpack.dev.js",
+    "build": "webpack --config=config/webpack.prod.js"
   },
   "dependencies": {
     "axios": "^1.6.8",

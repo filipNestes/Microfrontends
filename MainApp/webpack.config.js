@@ -20,18 +20,11 @@ module.exports = {
     new ModuleFederationPlugin({
       name: "main",
       filename: "remoteEntry.js",
-      exposes: {
-        "./SharedState": "./src/SharedState",
-      },
       remotes: {
-        microfrontend: "microfrontend@http://localhost:3001/remoteEntry.js",
-        angularMicrofrontend:
-          "angularMicrofrontend@http://localhost:4201/remoteEntry.js",
-        vueMicrofrontend:
-          "vueMicrofrontend@http://localhost:3004/remoteEntry.js",
-        viteVueApp: "viteVueApp@http://localhost:5173/remoteEntry.js",
-        angularMf: "angularMf@http://localhost:3002/remoteEntry.js",
-        svelteMf: "svelteMf@http://localhost:3008/remoteEntry.js",
+        reactMf: "ReactMicrofrontend@http://localhost:3001/remoteEntry.js",
+        angularMf: "AngularMicrofrontend@http://localhost:3002/remoteEntry.js",
+        vueMf: "VueMicrofrontend@http://localhost:3003/remoteEntry.js",
+        svelteMf: "SvelteMicrofrontend@http://localhost:3004/remoteEntry.js",
       },
       shared: {
         ...packageJson.dependencies,
@@ -44,7 +37,7 @@ module.exports = {
     rules: [
       {
         test: /\.(js|jsx)$/,
-        exclude: /node_modules/,
+        exclude: /node_modules\/(?!npmpackage)/,
         use: {
           loader: "babel-loader",
           options: {
@@ -53,7 +46,7 @@ module.exports = {
         },
       },
       {
-        test: /\.scss$/,
+        test: /\.(sass|less|css|scss)$/,
         use: ["style-loader", "css-loader", "sass-loader"],
       },
     ],
@@ -61,7 +54,7 @@ module.exports = {
 
   devServer: {
     port: 3000,
-    historyApiFallback: true, // Pridané, aby podporovalo SPA routovanie na klientovi
+    historyApiFallback: true,
     static: {
       directory: path.join(__dirname, "dist"),
     },

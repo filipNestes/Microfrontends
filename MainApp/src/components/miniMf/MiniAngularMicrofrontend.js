@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { mount } from "angularMf/miniAngularMf";
+import { mount } from "angularMf/MiniAngularMf";
 
 const angularMiniMicrofrontend = () => {
   const ref = useRef(null);

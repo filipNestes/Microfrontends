@@ -1,0 +1,48 @@
+.npm-content {
+  margin: 2rem;
+
+  label {
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  input {
+    padding: 8px;
+    margin-bottom: 10px;
+    width: 85%;
+  }
+
+  button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 2rem;
+  }
+
+  button:hover {
+    background-color: #0056b3;
+  }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  th,
+  td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+
+  th {
+    background-color: #f2f2f2;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+}

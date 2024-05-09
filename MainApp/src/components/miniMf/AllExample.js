@@ -5,14 +5,14 @@ import SvelteMiniMicrofrontend from "./MiniSvelteMicrofrontend";
 import "./allExample.scss";
 
 const MiniReactApp = lazy(() =>
-  import("microfrontend/MiniReactApp").catch(() => ({
-    default: () => <div>Ahoj</div>,
+  import("reactMf/MiniReactApp").catch(() => ({
+    default: () => <div />,
   }))
 );
 
 const MiniAppInput = lazy(() =>
-  import("microfrontend/MiniAppInput").catch(() => ({
-    default: () => <div>Ahoj</div>,
+  import("reactMf/MiniAppInput").catch(() => ({
+    default: () => <div>Fallback</div>,
   }))
 );
 

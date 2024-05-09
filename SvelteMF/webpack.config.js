@@ -43,7 +43,6 @@ module.exports = {
         use: [MiniCssExtractPlugin.loader, "css-loader"],
       },
       {
-        // required to prevent errors from Svelte on Webpack 5+
         test: /node_modules\/svelte\/.*\.mjs$/,
         resolve: {
           fullySpecified: false,
@@ -54,11 +53,21 @@ module.exports = {
   mode,
   plugins: [
     new ModuleFederationPlugin({
-      name: "svelteMf",
+      name: "SvelteMicrofrontend",
       filename: "remoteEntry.js",
       exposes: {
-        "./footerModule": "./src/loadApp.js",
-        "./svelteMiniApp": "./src/loadMiniApp.js",
+        "./SvelteMainMf": "./src/loadApp.js",
+        "./SvelteMiniApp": "./src/loadMiniApp.js",
+      },
+      shared: {
+        svelte: {
+          singleton: true,
+          eager: true,
+        },
+        "some-shared-lib": {
+          singleton: true,
+          strictVersion: true,
+        },
       },
     }),
     new MiniCssExtractPlugin({

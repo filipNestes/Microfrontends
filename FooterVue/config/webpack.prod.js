@@ -1,19 +1,17 @@
 const { merge } = require("webpack-merge");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const commonConfig = require("./webpack.common");
 const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
+const commonConfig = require("./webpack.common");
 const packageJson = require("../package.json");
+const path = require("path");
 
-const devConfig = {
-  mode: "development",
+const prodConfig = {
+  mode: "production",
   output: {
-    publicPath: "http://localhost:3010/",
-  },
-  devServer: {
-    port: 3010,
-    historyApiFallback: {
-      index: "/index.html",
-    },
+    path: path.resolve(__dirname, "../dist"),
+    filename: "[name].[contenthash].js",
+    publicPath: "/",
+    clean: true,
   },
   plugins: [
     new ModuleFederationPlugin({
@@ -26,8 +24,16 @@ const devConfig = {
     }),
     new HtmlWebpackPlugin({
       template: "./public/index.html",
+      minify: {
+        collapseWhitespace: true,
+        removeComments: true,
+        removeRedundantAttributes: true,
+        removeScriptTypeAttributes: true,
+        removeStyleLinkTypeAttributes: true,
+        useShortDoctype: true,
+      },
     }),
   ],
 };
 
-module.exports = merge(commonConfig, devConfig);
+module.exports = merge(commonConfig, prodConfig);

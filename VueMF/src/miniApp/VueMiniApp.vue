@@ -22,7 +22,10 @@
       <span> Vue.js </span>
     </div>
     <div class="message">
-      Message from React: <span>{{ messageFromReact }}</span>
+      <h3>Message from React:</h3>
+      <div>
+        <span>{{ messageFromReact }}</span>
+      </div>
     </div>
   </div>
 </template>
@@ -39,7 +42,6 @@ export default {
   methods: {
     handleReactMessage(event) {
       this.messageFromReact = event.detail.message;
-      console.log("Received message from React:", this.messageFromReact);
     },
   },
 
@@ -61,6 +63,8 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  border: 2px solid green;
+  border-radius: 8px;
 
   .vueMf-title {
     color: #484848;
@@ -87,14 +91,28 @@ export default {
       color: #35495e;
     }
   }
+
   .message {
     text-align: left;
     padding: 10px 10px;
-    font-size: 18px;
-    font-weight: bold;
 
-    span {
-      color: #2c3e50;
+    h3 {
+      text-align: center;
+      text-decoration: underline;
+      font-size: 1.5rem;
+    }
+
+    div {
+      color: #fff;
+      text-shadow: 1px 1px 1px rgb(1 1 1 / 50%);
+      height: 2rem;
+      padding: 0 1rem;
+      text-align: center;
+      font-weight: bold;
+
+      span {
+        border-bottom: 3px dotted #fff;
+      }
     }
   }
 }
