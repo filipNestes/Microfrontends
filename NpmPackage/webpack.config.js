@@ -2,36 +2,37 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-  entry: "./src/index.js", 
+  entry: "./src/index.js",
   output: {
-    path: path.resolve(__dirname, "dist"), 
-    filename: "bundle.js", 
-    libraryTarget: "umd", 
-    globalObject: "this", 
+    path: path.resolve(__dirname, "dist"),
+    filename: "bundle.js",
+    libraryTarget: "umd",
+    globalObject: "this",
+  },
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/, 
+        test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader", 
+          loader: "babel-loader",
           options: {
-            presets: ["@babel/preset-env", "@babel/preset-react"], 
+            presets: ["@babel/preset-env", "@babel/preset-react"],
           },
         },
       },
       {
-        test: /\.css$/, 
-        use: ["style-loader", "css-loader"],  
+        test: /\.css$/,
+        use: ["style-loader", "css-loader"],
       },
     ],
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: "./public/index.html",  
+      template: "./public/index.html",
     }),
   ],
   resolve: {
-    extensions: [".js", ".jsx"], 
+    extensions: [".js", ".jsx"],
   },
 };
