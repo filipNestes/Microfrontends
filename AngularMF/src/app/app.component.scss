@@ -1,0 +1,18 @@
+.angular-microfrontend {
+  height: 100%;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+
+  .name {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2rem;
+    background-color: #fea0a0;
+
+    .angular-logo {
+      margin: 1rem;
+    }
+  }
+}

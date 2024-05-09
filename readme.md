@@ -6,7 +6,7 @@ This project comprises multiple microfrontend applications including MainApp, Ap
 
 ### Step 1: Start Verdaccio in MainApp
 
-Verdaccio acts as a local npm registry. To start it, navigate to the MainApp folder and run the Verdaccio command. This will serve your npm packages locally, which is particularly useful for development.
+Verdaccio acts as a local npm registry. To start it, navigate to the NpmPackage folder and run the Verdaccio command. This will serve your npm packages locally, which is particularly useful for development.
 
 ```bash
 cd NpmPackage/
@@ -27,7 +27,7 @@ Email: "type your email"
 \NpmPackage> npm publish
 ```
 
-### Step 3: Install npm packages defined in package.json
+### Step 3: Open new terminal and install npm packages defined in package.json
 
 ```bash
 cd MainApp
@@ -46,14 +46,15 @@ cd MainApp
 \MainApp> npm run start
 ```
 
-### Step 6: Start Api server
+### Step 6: Open new terminal and start Api server
 
 ```bash
 cd Api-server
+\Api-server> npm i
 \Api-server> node server.js
 ```
 
-### Step 7: Switch to ReactMf and start it
+### Step 7: Open new terminal and switch to ReactMf and start it
 
 ```bash
 cd ReactMf
@@ -62,7 +63,7 @@ cd ReactMf
 \ReactMf> npm run start
 ```
 
-### Step 8: Switch to AngularMf and start it
+### Step 8: Open new terminal and switch to AngularMf and start it
 
 ```bash
 cd AngularMf
@@ -71,7 +72,7 @@ cd AngularMf
 \AngularMf> npm run start
 ```
 
-### Step 9: Switch to VueMf and start it
+### Step 9: Open new terminal and switch to VueMf and start it
 
 ```bash
 cd VueMf
@@ -80,7 +81,7 @@ cd VueMf
 \VueMf> npm run start
 ```
 
-### Step 10: Switch to SvelteMf and start it
+### Step 10: Open new terminal and switch to SvelteMf and start it
 
 ```bash
 cd SvelteMf
@@ -89,7 +90,7 @@ cd SvelteMf
 \SvelteMf> npm run start
 ```
 
-### Step 11: Switch to FooterVue and start it
+### Step 11: Open new terminal and switch to FooterVue and start it
 
 ```bash
 cd FooterVue
@@ -97,3 +98,5 @@ cd FooterVue
 \FooterVue> npm run build   // only for production
 \FooterVue> npm run start
 ```
+
+All steps are done. Now you can go to the browrser to address http://localhost:3000/ and refresh the page.

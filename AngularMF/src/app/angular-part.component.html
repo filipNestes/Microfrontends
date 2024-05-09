@@ -1,0 +1,53 @@
+<div>
+  <header>
+    <h2>Books</h2>
+    <button (click)="deleteAll()" class="delete-all-btn">🗑️ Delete All Books</button>
+  </header>
+  <table *ngIf="data.length; else noData">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Genre</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of data; let i = index">
+        <td>{{ item.title }}</td>
+        <td>{{ item.author }}</td>
+        <td>{{ item.genre }}</td>
+        <td>
+          <button (click)="deleteItem(i)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <ng-template #noData><p>No data available.</p></ng-template>
+
+  <header>
+    <h2>Movies</h2>
+    <button (click)="deleteAllMovies()" class="delete-all-btn">🗑️ Delete All Movies</button>
+  </header>
+  <table *ngIf="movies.length; else noMovieData">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Director</th>
+        <th>Genre</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let movie of movies; let i = index">
+        <td>{{ movie.name }}</td>
+        <td>{{ movie.director }}</td>
+        <td>{{ movie.genre }}</td>
+        <td>
+          <button (click)="deleteMovie(i)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <ng-template #noMovieData><p>No movies available.</p></ng-template>
+</div>
